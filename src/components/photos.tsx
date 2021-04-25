@@ -29,26 +29,13 @@ export default function DisplayPictures() {
     });
   };
 
-  const handleSubmit = () => {
+  useEffect(() => {
     const sol = state.sol;
     const cam = state.cam;
     const rover = state.rover;
-    const data = {
-      sol,
-      cam,
-      rover,
-    };
-    console.log(data);
 
-    return data;
-  };
-  const sol = handleSubmit().sol;
-  const cam = handleSubmit().cam;
-  const rover = handleSubmit().rover;
+    const link = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}&camera=${cam}&rover=${rover}&per_page=${perPage}&page=${page}&api_key=${apiKey}`;
 
-  const link = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}&camera=${cam}&rover=${rover}&per_page=${perPage}&page=${page}&api_key=${apiKey}`;
-
-  useEffect(() => {
     const nasaResponse = () => {
       fetch(link)
         .then((res) => res.json())
@@ -59,7 +46,6 @@ export default function DisplayPictures() {
             alert('No more pictures with such characteristics!');
             window.location.reload();
           }
-          console.log(res);
         });
     };
     nasaResponse();
@@ -71,6 +57,7 @@ export default function DisplayPictures() {
         <Link className="go-back-link" to="/">
           Go back
         </Link>
+        <h3>Please choose a Sol, Camera and Rover</h3>
         <div className="options">
           <Input
             className="select-input"
@@ -124,7 +111,6 @@ export default function DisplayPictures() {
               className="load-button"
               onClick={() => {
                 setPage(page + 1);
-                handleSubmit();
               }}
             >
               Load More
