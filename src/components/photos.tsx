@@ -40,9 +40,9 @@ export default function DisplayPictures() {
       fetch(link)
         .then((res) => res.json())
         .then((res) => {
-          setTotalPages(1000);
-          setPhotoData([...photoData, ...res.photos]);
           const photoArray = Object.values(res.photos);
+          setTotalPages(1000);
+          setPhotoData([...photoData, ...photoArray]);
           const a = photoArray.length > 0;
           if (!a) {
             alert('No more pictures with such characteristics!');
