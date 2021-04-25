@@ -1,0 +1,36 @@
+body {
+  background-image: url(https://scitechdaily.com/images/Olympus-Mons-Mars-scaled.jpg);
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    background-image: url(https://www.highreshdwallpapers.com/wp-content/uploads/2013/08/Earth-Or-Mars-320x480.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .app {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+
+    .main {
+      .main-link {
+        font-family: 'Zen Dots', cursive;
+        font-weight: 900;
+        font-size: 40px;
+        text-decoration: none;
+        background-color: #ad6242;
+        color: black;
+        padding: 60px;
+        border-radius: 50%;
+        @media (max-width: 600px) {
+          font-size: 20px;
+          padding: 30px;
+        }
+      }
+      .main-link:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
