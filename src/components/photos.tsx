@@ -42,7 +42,7 @@ export default function DisplayPictures() {
         .then((res) => {
           setTotalPages(1000);
           setPhotoData([...photoData, ...res.photos]);
-          if (!res.photos[0]) {
+          if (res.photos.length === 0) {
             alert('No more pictures with such characteristics!');
             window.location.reload();
           }
