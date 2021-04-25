@@ -32,5 +32,34 @@ body {
         opacity: 0.7;
       }
     }
+    .location {
+      display: flex;
+      flex-direction: column;
+      .photos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .mars-image {
+          height: 300px;
+          width: 300px;
+          margin: 20px;
+        }
+      }
+      .load-button {
+        font-size: 30px;
+        border-radius: 5px;
+        padding: 15px;
+        font-family: inherit;
+        background-color: #c1440e;
+        border: solid #451804 2px;
+        opacity: 0.5;
+        font-weight: 700;
+        cursor: pointer;
+        color: #451804;
+      }
+      .load-button:hover {
+        background-color: #e77d11;
+      }
+    }
   }
 }
