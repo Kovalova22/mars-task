@@ -13,6 +13,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    .options {
+      display: flex;
+      flex-direction: row;
+      .select-input {
+        margin: 5px;
+      }
+    }
   }
   .go-back-link {
     margin: 20px;
