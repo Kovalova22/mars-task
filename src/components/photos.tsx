@@ -42,8 +42,9 @@ export default function DisplayPictures() {
         .then((res) => {
           setTotalPages(1000);
           setPhotoData([...photoData, ...res.photos]);
-          console.log(res.photos);
-          if (Array.isArray(res.photos) && !res.photos.length) {
+          const photoArray = res.photos;
+          const a = photoArray.length > 0;
+          if (!a) {
             alert('No more pictures with such characteristics!');
             window.location.reload();
           }
