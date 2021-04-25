@@ -7,6 +7,19 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
   }
+  .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .go-back-link {
+    margin: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #ad6242;
+  }
 
   .app {
     display: flex;
@@ -32,17 +45,29 @@ body {
         opacity: 0.7;
       }
     }
-    .location {
+    .container {
       display: flex;
       flex-direction: column;
-      .photos {
+      align-items: center;
+      .location {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        .mars-image {
-          height: 300px;
-          width: 300px;
-          margin: 20px;
+        .photos {
+          display: flex;
+          justify-content: space-around;
+          .mars-image {
+            height: 500px;
+            width: 500px;
+            margin: 30px;
+            border-radius: 3px;
+            @media (max-width: 600px) {
+              display: flex;
+              flex-direction: column;
+              height: 300px;
+              width: 300px;
+              margin: 15px;
+            }
+          }
         }
       }
       .load-button {
@@ -56,6 +81,7 @@ body {
         font-weight: 700;
         cursor: pointer;
         color: #451804;
+        width: fit-content;
       }
       .load-button:hover {
         background-color: #e77d11;

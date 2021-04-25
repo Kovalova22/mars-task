@@ -1,54 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import { slice, concat } from 'lodash';
-
-import { api } from '../api/api';
 
 import '../App.scss';
+import { Link } from 'react-router-dom';
+
+const apiKey = process.env.REACT_APP_NASA_KEY;
 
 export default function DisplayPictures() {
+  const perPage = 3;
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
+
   const [photoData, setPhotoData] = useState<any>([]);
 
+  const sol = 1000;
+  const cam = 'FHAZ';
+  const rover = 'Curiosity';
+
   useEffect(() => {
-    const nasaResponse = async () => {
-      const res = await api.nasaPhotos.get();
-      const photos = res.data.photos;
-      setPhotoData([...photoData, ...photos]);
-      console.log(photoData);
+    const nasaResponse = () => {
+      fetch(
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${sol}&camera=${cam}&rover=${rover}&per_page=${perPage}&page=${page}&api_key=${apiKey}`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          setTotalPages(1000);
+          setPhotoData([...photoData, ...res.photos]);
+          console.log(res);
+        });
     };
     nasaResponse();
-  }, [photoData]);
-
-  const LENGTH = photoData.length;
-  const DATA = [...photoData];
-  const LIMIT = 5;
-
-  const [showMore, setShowMore] = useState(true);
-  const [list, setList] = useState(slice(DATA, 0, LIMIT));
-  const [index, setIndex] = useState(LIMIT);
-
-  const loadMore = () => {
-    const newIndex = index + LIMIT;
-    const newShowMore = newIndex < LENGTH - 1;
-    const newList = concat(list, slice(DATA, index, newIndex));
-    setIndex(newIndex);
-    setList(newList);
-    setShowMore(newShowMore);
-  };
+  }, [page]);
 
   return (
     <>
-      <div className="location">
-        {list.map((x, y) => (
-          <div className="photos" key={y}>
-            <img className="mars-image" src={x.img_src} alt="random" />
+      <div className="content">
+        <Link className="go-back-link" to="/">
+          Go back
+        </Link>
+        <div className="container">
+          <div className="location">
+            {photoData.map((x, y) => (
+              <div className="photos" key={y}>
+                <img className="mars-image" src={x.img_src} alt="random" />
+              </div>
+            ))}
           </div>
-        ))}
-        {showMore && (
-          <button className="load-button" onClick={loadMore}>
-            {' '}
-            Load More{' '}
-          </button>
-        )}
+          {totalPages !== page && (
+            <button className="load-button" onClick={() => setPage(page + 1)}>
+              Load More
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
